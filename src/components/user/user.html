@@ -1,0 +1,140 @@
+<template style="position: absolute;">
+  <require from="./select-column"></require>
+  <require from="./css/user.css"></require>
+  <div id="top">
+    <div class="ui black inverted fixed menu"></div>
+  </div>
+  <div id="main">
+    <div id="topmenu">
+      <div
+        class="ui top attached tabular menu"
+        style="padding-top: 40px; border: none;"
+      >
+        <a class="item" style="padding-left: 40%;"
+          ><span style="font: 20px arial, sans-serif;"></span
+        ></a>
+        <a class="item" click.delegate="home()" style.bind="homeStyleString"
+          ><span style="font: 20px arial, sans-serif;">系统数据</span></a
+        >
+        <a class="item" click.delegate="user()" style.bind="userStyleString"
+          ><span style="font: 20px arial, sans-serif;">账户管理</span></a
+        >
+      </div>
+    </div>
+    <!-- 用户信息 -->
+    <div
+      class="ui segment"
+      style="
+        padding-top: 20px;
+        margin-left: 50px;
+        width: 1420px;
+        position: absolute;
+      "
+      style.bind="usergridshow"
+    >
+      <div class="buttons" style="padding-top: 20px; padding-left: 0%;">
+        <button class="ui primary basic button" click.delegate="showsidebar()">
+          新建
+        </button>
+        <button class="ui primary basic button" click.delegate="update()">
+          刷新
+        </button>
+        <div style="display: inline-block; padding-left: 40px;">
+          <div class="ui left icon input">
+            <input type="text" placeholder="Search users..." />
+            <i class="users icon"></i>
+          </div>
+        </div>
+      </div>
+      <div
+        class="ui grid"
+        style="
+          padding-top: 0px;
+          border-bottom-style: solid;
+          border-color: rgb(177, 175, 175);
+        "
+      >
+        <div class="four wide column">账户</div>
+        <div class="four wide column">名字</div>
+        <div class="four wide column">用户组</div>
+        <div class="four wide column">状态</div>
+      </div>
+      <label repeat.for="user of users" module.bind="user" >
+        <div class="ui grid" id="user"style="margin-top:12px;border-bottom:rgb(177, 175, 175) solid;">
+          <div class="four wide column">
+            <span>${user.account}</span> 
+          </div>
+          <div class="four wide column">
+           <span> ${user.name}</span>
+          </div>
+          <div class="four wide column" >
+            <span>${user.group}</span>
+          </div>
+          <div class="four wide column"><span>${user.state}<</span>/div>
+        </div>
+      </label>
+    </div>
+    <!-- 系统信息 -->
+    <div
+      class="ui segment"
+      style="
+        padding-top: 20px;
+        margin-left: 50px;
+        width: 1420px;
+        position: absolute;
+      "
+      style.bind="systemgridshow"
+    ></div>
+    <div class.bind="sidebarmenu" class="segment">
+      <div class="ui form">
+        <div
+          class="ui fluid fields"
+          style="display: block; width: 100%; margin-left: 0px;"
+        >
+          <div
+            class="field"
+            style="padding-top: 40px;"
+            style="padding-top: 20px;"
+          >
+            <label
+              ><span style="color: white; font-size: 20px;">账号</span></label
+            >
+            <input type="text" value.bind="newaccount" />
+          </div>
+          <div class="field" style="padding-top: 20px;">
+            <label
+              ><span style="color: white; font-size: 20px;">姓名</span></label
+            >
+            <input type="text" value.bind="newname" />
+          </div>
+          <div class="field" style="padding-top: 20px;">
+            <label
+              ><span style="color: white; font-size: 20px;">用户组</span></label
+            >
+            <input type="text" value.bind="newgroup" />
+          </div>
+          <div class="field" style="padding-top: 20px;">
+            <label
+              ><span style="color: white; font-size: 20px;">状态</span></label
+            >
+            <input type="text" value.bind="newstate" />
+          </div>
+        </div>
+        <button
+          class="ui inverted basic button"
+          click.trigger="adduser()"
+          style="margin-left: 10px;"
+        >
+          确定
+        </button>
+        <button
+          class="ui inverted basic button"
+          click.trigger="clear()"
+          style="margin-left: 10px;"
+        >
+          清除
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
