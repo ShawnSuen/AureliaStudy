@@ -1,5 +1,4 @@
 <template style="position: absolute;">
-  <require from="./select-column"></require>
   <require from="./css/user.css"></require>
   <div id="top">
     <div class="ui black inverted fixed menu"></div>
@@ -59,23 +58,28 @@
         <div class="four wide column">用户组</div>
         <div class="four wide column">状态</div>
       </div>
-      <label repeat.for="user of users" module.bind="user" >
-        <div class="ui grid" id="user"style="margin-top:12px;border-bottom:rgb(177, 175, 175) solid;">
-          <div class="four wide column">
-            <span>${user.account}</span> 
+      <label repeat.for="user of users" module.bind="user">
+        <div
+          class="ui grid"
+          id="user"
+          style="margin-top: 12px; border-bottom: rgb(177, 175, 175) solid;"
+        >
+          <div class="four wide column" click.delegate="usersidebar()">
+            <span>${user.account}</span>
           </div>
           <div class="four wide column">
-           <span> ${user.name}</span>
+            <span> ${user.name}</span>
           </div>
-          <div class="four wide column" >
+          <div class="four wide column">
             <span>${user.group}</span>
           </div>
-          <div class="four wide column"><span>${user.state}<</span>/div>
+          <div class="four wide column"><span>${user.state}</span></div>
         </div>
       </label>
     </div>
     <!-- 系统信息 -->
-    <div
+    <!-- 侧拉栏 -->
+    <!-- <div
       class="ui segment"
       style="
         padding-top: 20px;
@@ -84,7 +88,7 @@
         position: absolute;
       "
       style.bind="systemgridshow"
-    ></div>
+    ></div> -->
     <div class.bind="sidebarmenu" class="segment">
       <div class="ui form">
         <div
@@ -133,6 +137,59 @@
           style="margin-left: 10px;"
         >
           清除
+        </button>
+      </div>
+    </div>
+
+    <!-- 修改用户信息 -->
+    <div class.bind="sidebaruser" class="segment">
+      <div class="ui form">
+        <div
+          class="ui fluid fields"
+          style="display: block; width: 100%; margin-left: 0px;"
+        >
+          <div
+            class="field"
+            style="padding-top: 40px;"
+            style="padding-top: 20px;"
+          >
+            <label
+              ><span style="color: white; font-size: 20px;">账号</span></label
+            >
+            <input type="text" value.bind="changeaccount" />
+          </div>
+          <div class="field" style="padding-top: 20px;">
+            <label
+              ><span style="color: white; font-size: 20px;">姓名</span></label
+            >
+            <input type="text" value.bind="changename" />
+          </div>
+          <div class="field" style="padding-top: 20px;">
+            <label
+              ><span style="color: white; font-size: 20px;">用户组</span></label
+            >
+            <input type="text" value.bind="changegroup" />
+          </div>
+          <div class="field" style="padding-top: 20px;">
+            <label
+              ><span style="color: white; font-size: 20px;">状态</span></label
+            >
+            <input type="text" value.bind="changestate" />
+          </div>
+        </div>
+        <button
+          class="ui inverted basic button"
+          click.trigger="changeuser()"
+          style="margin-left: 10px;"
+        >
+          确定修改
+        </button>
+        <button
+          class="ui inverted basic button"
+          click.trigger="clear()"
+          style="margin-left: 10px;"
+        >
+          取消修改
         </button>
       </div>
     </div>

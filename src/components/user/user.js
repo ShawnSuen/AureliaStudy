@@ -1,4 +1,6 @@
 import { inject } from "aurelia-framework";
+import { obj } from "through2";
+
 @inject(Element)
 export class User {
   constructor(element) {
@@ -17,27 +19,73 @@ export class User {
         state: "正常",
       },
     ];
+
+    this.i = -1;
+
     this.contextmenu = ["修改", "删除"];
     this.sideshow = "display:none";
     this.sidebarmenu = "ui vertical sidebar menu right";
+    this.sidebaruser = "ui vertical sidebar menu right";
+
     this.newname = "";
     this.newaccount = "";
     this.newgroup = "";
     this.newstate = "";
+
+    this.changename = "";
+    this.changeaccount = "";
+    this.changegroup = "";
+    this.changestate = "";
+
     this.usergridshow = "display:none";
     this.systemgridshow = "";
     this.homeStyleString =
       "border-bottom-style: solid; border-bottom-color: rgb(33,133,208);";
+    this.main = this.element.getElementsByClassName("column");
+    console.log(this.main);
+    this.innerHTML = "<span></span>";
+
+    this.flag = true;
+    this.userflag = true;
+
+    this.target;
+    this.target1;
+    this.handleBodyClick = (e) => {
+      this.target = e.target.innerText;
+    };
   }
 
-  update() {
-    window.location.reload(true);
-    showsidebar().click();
-  }
+  update() {}
 
   showsidebar() {
-    this.sidebarmenu =
-      "ui inverted vertical sidebar menu right overlay visible";
+    this.flag1 = this.flag;
+    if (this.flag1 == true) {
+      this.sidebarmenu =
+        "ui inverted vertical sidebar menu right overlay visible";
+      console.log("show" + this.flag1);
+      this.flag1 = false;
+    } else {
+      this.sidebarmenu = "ui vertical sidebar menu right";
+      this.flag1 = true;
+    }
+    this.flag = this.flag1;
+    this.sidebaruser = "ui vertical sidebar menu right";
+  }
+
+  usersidebar() {
+    this.target1 = this.target;
+    this.flag1 = this.userflag;
+    if (this.flag1 == true) {
+      this.sidebaruser =
+        "ui inverted vertical sidebar menu right overlay visible";
+      console.log("target1" + this.target1);
+      this.flag1 = false;
+    } else {
+      this.sidebaruser = "ui vertical sidebar menu right";
+      this.flag1 = true;
+    }
+    this.userflag = this.flag1;
+    this.sidebarmenu = "ui vertical sidebar menu right";
   }
 
   adduser() {
@@ -47,7 +95,6 @@ export class User {
       group: this.newgroup,
       state: this.newstate,
     };
-    console.log(this.newuser);
     if (
       this.newaccount != "" &&
       this.newname != "" &&
@@ -55,6 +102,7 @@ export class User {
       this.newstate != ""
     ) {
       this.users.push(this.newuser);
+      this.update();
     }
   }
 
@@ -86,7 +134,77 @@ export class User {
     this.systemgridshow = "";
   }
 
-  test() {
-    console.log(this.element);
+  /*
+  usergrid(users = []) {
+    for (this.i = 0; this.i < users.length; this.i++) {
+      this.innerHTML =
+        this.innerHTML +
+        '<div class="ui grid" id="user"style="margin-top:12px;border-bottom:rgb(177, 175, 175) solid;">' +
+        '<div class="four wide column">' +
+        '<button class="userbutton" click.tragger="adduser()">' +
+        this.users[this.i].account +
+        "</button></div>" +
+        '<div class="four wide column"><span>' +
+        this.users[this.i].name +
+        "</span></div>" +
+        '<div class="four wide column"><span>' +
+        this.users[this.i].group +
+        "</span></div>" +
+        '<div class="four wide column"><span>' +
+        this.users[this.i].state +
+        "</span></div></div>";
+    }
+  }
+*/
+  //修改用户界面
+  changeuser() {
+    console.log(11111);
+    for (this.i = 0; this.i < this.users.length; this.i++) {
+      if (this.target1 == this.users[this.i].account) {
+        if (
+          this.changeaccount != "" &&
+          this.changename != "" &&
+          this.changegroup != "" &&
+          this.changestate != ""
+        ) {
+          this.users[this.i].account = this.changeaccount;
+          this.users[this.i].name = this.changename;
+          this.users[this.i].group = this.changegroup;
+          this.users[this.i].group = this.changestate;
+          console.log(this.user[this.i]);
+          this.i = -1;
+          break;
+        }
+      }
+    }
+  }
+
+  // changeuser() {
+  //   if (
+  //     this.changeraccount != "" &&
+  //     this.changname != "" &&
+  //     this.changegroup != "" &&
+  //     this.changestate != ""
+  //   ) {
+  //     this.users[this.i] = {
+  //       acconut: this.changeacconut,
+  //       name: this.changename,
+  //       group: this.changegroup,
+  //       state: this.changestate,
+  //     };
+  //   }
+  //   this.i = -1;
+  // }
+  test() {}
+  changemenu() {
+    this.changemenuStyle = "display:block";
+  }
+
+  attached() {
+    document.addEventListener("click", this.handleBodyClick);
+  }
+
+  detached() {
+    document.removeEventListener("click", this.handleBodyClick);
   }
 }
