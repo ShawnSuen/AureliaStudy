@@ -94,24 +94,6 @@ export class User {
     this.sidebarmenu = "ui vertical sidebar menu right";
   }
 
-  adduser() {
-    this.newuser = {
-      account: this.newaccount,
-      name: this.newname,
-      group: this.newgroup,
-      state: this.newstate,
-    };
-    if (
-      this.newaccount != "" &&
-      this.newname != "" &&
-      this.newgroup != "" &&
-      this.newstate != ""
-    ) {
-      this.users.push(this.newuser);
-      this.update();
-    }
-  }
-
   clear() {
     this.newname = "";
     this.newaccount = "";
@@ -139,29 +121,24 @@ export class User {
     this.usergridshow = "display:none";
     this.systemgridshow = "";
   }
-
-  /*
-  usergrid(users = []) {
-    for (this.i = 0; this.i < users.length; this.i++) {
-      this.innerHTML =
-        this.innerHTML +
-        '<div class="ui grid" id="user"style="margin-top:12px;border-bottom:rgb(177, 175, 175) solid;">' +
-        '<div class="four wide column">' +
-        '<button class="userbutton" click.tragger="adduser()">' +
-        this.users[this.i].account +
-        "</button></div>" +
-        '<div class="four wide column"><span>' +
-        this.users[this.i].name +
-        "</span></div>" +
-        '<div class="four wide column"><span>' +
-        this.users[this.i].group +
-        "</span></div>" +
-        '<div class="four wide column"><span>' +
-        this.users[this.i].state +
-        "</span></div></div>";
+  //添加用户
+  adduser() {
+    this.newuser = {
+      account: this.newaccount,
+      name: this.newname,
+      group: this.newgroup,
+      state: this.newstate,
+    };
+    if (
+      this.newaccount != "" &&
+      this.newname != "" &&
+      this.newgroup != "" &&
+      this.newstate != ""
+    ) {
+      this.users.push(this.newuser);
+      this.update();
     }
   }
-*/
   //修改用户界面
   changeuser() {
     for (this.i = 0; this.i < this.users.length; this.i++) {
@@ -180,6 +157,14 @@ export class User {
           this.i = -1;
           break;
         }
+      }
+    }
+  }
+  //删除用户
+  deleteuser() {
+    for (this.i = 0; this.i < this.users.length; this.i++) {
+      if (this.target1 == this.users[this.i].account) {
+        this.users.splice(this.i);
       }
     }
   }

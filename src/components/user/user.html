@@ -1,7 +1,17 @@
 <template style="position: absolute;">
   <require from="./css/user.css"></require>
   <div id="top">
-    <div class="ui black inverted fixed menu"></div>
+    <div class="ui black inverted fixed menu">
+      <span
+        style="
+          font-size: 25px;
+          color: white;
+          padding-top: 10px;
+          padding-left: 10px;
+        "
+        >WMS设置</span
+      >
+    </div>
   </div>
   <div id="main">
     <div id="topmenu">
@@ -198,13 +208,14 @@
           class="ui inverted basic button"
           click.trigger="clear()"
           style="margin-left: 10px;"
+          click.delegate="deleteuser()"
         >
-          取消修改
+          删除用户
         </button>
       </div>
     </div>
   </div>
-  <div class="ui dropdown">
+  <!-- <div class="ui dropdown">
     <div class="text">File</div>
     <i class="dropdown icon"></i>
     <div class="menu">
@@ -246,5 +257,5 @@
       </div>
       <div class="item">E-mail Collaborators</div>
     </div>
-  </div>
+  </div> -->
 </template>
