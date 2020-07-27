@@ -127,7 +127,7 @@ export class User {
 
   user() {
     this.userStyleString =
-      "border-bottom-style: solid; border-bottom-color: rgb(33,133,208);";
+      "border-bottom-style: solid; border-bottom-color: rgb(177, 175, 175);";
     this.homeStyleString = "";
     this.usergridshow = "";
     this.systemgridshow = "display:none";
@@ -135,7 +135,7 @@ export class User {
   home() {
     this.userStyleString = "";
     this.homeStyleString =
-      "border-bottom-style: solid; border-bottom-color: rgb(33,133,208);";
+      "border-bottom-style: solid; border-bottom-color: rgb(177, 175, 175);";
     this.usergridshow = "display:none";
     this.systemgridshow = "";
   }
