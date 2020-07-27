@@ -19,6 +19,7 @@ export class User {
         state: "正常",
       },
     ];
+    this.useraccount = [];
 
     this.i = -1;
 
@@ -50,8 +51,14 @@ export class User {
 
     this.target;
     this.target1;
+
     this.handleBodyClick = (e) => {
-      this.target = e.target.innerText;
+      this.useraccount = this.fun();
+      for (this.j = 0; this.j < this.useraccount.length; this.j++) {
+        if (e.target.innerText == this.useraccount[this.j]) {
+          this.target1 = e.target.innerText;
+        }
+      }
     };
   }
 
@@ -73,7 +80,6 @@ export class User {
   }
 
   usersidebar() {
-    this.target1 = this.target;
     this.flag1 = this.userflag;
     if (this.flag1 == true) {
       this.sidebaruser =
@@ -158,7 +164,6 @@ export class User {
 */
   //修改用户界面
   changeuser() {
-    console.log(11111);
     for (this.i = 0; this.i < this.users.length; this.i++) {
       if (this.target1 == this.users[this.i].account) {
         if (
@@ -195,7 +200,16 @@ export class User {
   //   }
   //   this.i = -1;
   // }
-  test() {}
+
+  fun() {
+    this.useraccounts = [];
+    if (this.useraccounts.length < this.users.length) {
+      for (this.i = 0; this.i < this.users.length; this.i++) {
+        this.useraccounts.push(this.users[this.i].account);
+      }
+      return this.useraccounts;
+    }
+  }
   changemenu() {
     this.changemenuStyle = "display:block";
   }
